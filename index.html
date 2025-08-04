@@ -22,6 +22,16 @@
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         .fade-in-up { opacity: 0; animation-name: fadeInUp; animation-duration: 1s; animation-fill-mode: forwards; animation-delay: 0.3s; }
 
+        /* --- START: CSS FIX FOR RESPONSIVE VIDEO --- */
+        .video-desktop { display: block; } /* Show by default */
+        .video-mobile { display: none; } /* Hide by default */
+
+        @media (max-width: 600px) {
+            .video-desktop { display: none; } /* Hide desktop video on small screens */
+            .video-mobile { display: block; } /* Show mobile video on small screens */
+        }
+        /* --- END: CSS FIX FOR RESPONSIVE VIDEO --- */
+
         @media (max-width: 1024px) { .primary-navigation, .header-right > .contact-btn { display: none; } .nav-toggle { display: block; background: none; border: none; cursor: pointer; position: relative; z-index: 2001; } .hamburger { display: block; position: relative; width: 30px; height: 3px; background-color: var(--text-dark); transition: background-color 0.3s ease; border-radius: 5px; } .hamburger::before, .hamburger::after { content: ''; position: absolute; left: 0; width: 100%; height: 3px; background-color: var(--text-dark); border-radius: 5px; transition: transform 0.3s ease; } .hamburger::before { top: -8px; } .hamburger::after { top: 8px; } .mobile-nav-open .hamburger { background-color: transparent; } .mobile-nav-open .hamburger::before { transform: translateY(8px) rotate(45deg); } .mobile-nav-open .hamburger::after { transform: translateY(-8px) rotate(-45deg); } } @media (max-width: 900px) { .container { padding: 0 20px; } .header { padding: 15px 20px; } .about-section, .map-description-container, .tagline-section, .site-footer { padding-left: 20px; padding-right: 20px; } .stats-grid { grid-template-columns: 1fr 1fr; gap: 40px 20px; } .footer-main { grid-template-columns: 1fr 1fr; } .footer-column:first-child { grid-column: 1 / -1; text-align: center; } 
         .footer-column:first-child .footer-logo { justify-content: center; } .footer-column:first-child .logo-text-wrapper { align-items: center; } .footer-column:first-child .footer-description { margin: 20px auto 0 auto; } .hero { height: 80vh; padding: 120px 20px 60px; } .map-section { height: 60vh; } } @media (max-width: 600px) { .cursor-dot-outline, .cursor-dot { display: none; } html { cursor: auto; } a, button, .admin-icon { cursor: pointer; } .loader-logo { max-width: 180px; } .hero-main-text { font-size: 2.5rem; } .hero { height: 75vh; } .map-section { height: 50vh; } .footer-main { grid-template-columns: 1fr; text-align: center; } .footer-column { margin-bottom: 30px; } .footer-links { text-align: center; } .footer-socials { justify-content: center; } .footer-bottom { flex-direction: column-reverse; gap: 20px; } }
     </style>
@@ -63,7 +73,20 @@
     </div>
 
     <main>
-        <section id="home" class="hero"><video class="hero-wallpaper-video" autoplay loop muted playsinline poster="path/to/your/video-poster.jpg" preload="metadata"><source src="AIbackgroundvid-vertical.mp4" media="(max-width: 600px)"><source src="AIbackgroundvid.mp4" media="(min-width: 601px)">Your browser does not support the video tag.</video><div class="hero-content fade-in-up"><h1 class="hero-main-text">EMPOWERING THE FUTURE</h1><p class="hero-tagline">AI at the Core of Innovation</p></div></section>
+        <section id="home" class="hero">
+            <!-- START: HTML FIX FOR RESPONSIVE VIDEO -->
+            <video class="hero-wallpaper-video video-desktop" autoplay loop muted playsinline preload="metadata">
+                <source src="AIbackgroundvid.mp4" type="video/mp4">
+            </video>
+            <video class="hero-wallpaper-video video-mobile" autoplay loop muted playsinline preload="metadata">
+                <source src="AIbackgroundvid-vertical.mp4" type="video/mp4">
+            </video>
+            <!-- END: HTML FIX FOR RESPONSIVE VIDEO -->
+            <div class="hero-content fade-in-up">
+                <h1 class="hero-main-text">EMPOWERING THE FUTURE</h1>
+                <p class="hero-tagline">AI at the Core of Innovation</p>
+            </div>
+        </section>
         <div class="page-content">
             <section id="company" class="about-section fade-in-section"><div class="container"><h2 class="section-title">The Next Level of AI's Potential</h2><p class="section-subtitle">At Lifewood, we empower businesses to realise the transformative potential of AI. This is the next level, uncovering new methods and insights to reveal unexpected directions and possibilities: connecting across time, generations and technologies for everyone; delivering the highest levels of scalability, integration and security.</p></div></section>
             <section id="project" class="map-section fade-in-section"><video class="map-background" src="map.mp4" autoplay loop muted playsinline></video></section>
@@ -181,31 +204,23 @@
                 }
             };
             
-            // ------------------- START: CORRECTED AUTH LOGIC -------------------
-            // This listener will check the user's status when the page loads
-            // and whenever the user logs in or out.
             auth.onAuthStateChanged(user => {
-                adminIconBtn.style.display = 'flex'; // Always show the admin icon
+                adminIconBtn.style.display = 'flex'; 
 
-                // If a user is logged in, check if they are an admin
                 if (user) {
                     const isAdmin = user.email.endsWith('@lifewood.com');
                     if (isAdmin) {
-                        // User is an admin, set the session and redirect
                         sessionStorage.setItem('isAdminLoggedIn', 'true');
                         window.location.href = 'admin-dashboard.html';
                     } else {
-                        // User is NOT an admin. Show an error and log them out.
-                        auth.signOut(); // Log out the non-admin user
+                        auth.signOut(); 
                         loginError.textContent = "Access denied. Not an admin account.";
                         loginError.style.display = 'block';
                     }
                 } else {
-                    // No user is logged in. The admin icon should open the modal.
                     adminIconBtn.onclick = openAdminModal;
                 }
             });
-            // ------------------- END: CORRECTED AUTH LOGIC -------------------
             
             if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeAdminModal);
             if (adminModal) adminModal.addEventListener('click', (e) => e.target === adminModal && closeAdminModal());
@@ -221,8 +236,6 @@
                     const password = document.getElementById('admin-password').value;
                     
                     try {
-                        // Attempt to sign in. If successful, the onAuthStateChanged listener
-                        // above will handle the redirection or error message.
                         await auth.signInWithEmailAndPassword(email, password);
                     } catch (error) {
                         console.error("Login failed:", error.code);
