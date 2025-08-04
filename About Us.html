@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Lifewood AI Global Data</title>
+    <meta name="description" content="Discover Lifewood's mission to merge technological excellence with human-centric values, creating meaningful opportunities and pioneering AI solutions since 2004.">
+    <link rel="icon" href="icon.png" type="image/png">
+    <link rel="apple-touch-icon" href="icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Lora:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <style>
+        :root { --brand-green: #0a5441; --brand-green-light: #e6efec; --brand-saffron: #FFB347; --text-dark: #333333; --text-light: #f4f4f4; --bg-paper: #f7f7f7; --bg-white: #ffffff; --border-color: #e0e0e0; --cursor-dot-color: #0a5441; --cursor-outline-color: #0a5441; --neon-green: #39ff14;} 
+        html { scroll-behavior: smooth; cursor: none; } 
+        * { margin: 0; padding: 0; box-sizing: border-box; } 
+        body { font-family: 'Manrope', sans-serif; background-color: var(--bg-paper); color: var(--text-dark); } 
+        body.mobile-nav-open { overflow: hidden; } 
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; } 
+        .header { position: sticky; top: 0; left: 0; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; z-index: 1000; background-color: rgba(247, 247, 247, 0.8); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-color); } 
+        .logo-container { display: flex; align-items: center; text-decoration: none; } 
+        .logo-image { height: 60px; width: auto; display: block; } 
+        .logo-text-wrapper { display: flex; flex-direction: column; align-items: flex-start; margin-left: 15px; } 
+        .tagline-logo-line { font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 500; color: #555; white-space: nowrap; line-height: 1; } 
+        .header-right { display: flex; align-items: center; gap: 15px; } 
+        .primary-navigation ul { display: flex; gap: 25px; list-style: none; margin: 0; padding: 0; } 
+        .primary-navigation a { font-family: 'Lora', serif; font-size: 16px; color: var(--text-dark); text-decoration: none; position: relative; padding-bottom: 5px; transition: color 0.3s ease; } 
+        .primary-navigation a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background-color: var(--brand-green); transition: width 0.3s ease; } 
+        .primary-navigation a:hover::after { width: 100%; } 
+        .primary-navigation a.active-link { color: var(--brand-saffron); font-weight: 500; } 
+        .primary-navigation a.active-link::after { width: 100%; background-color: var(--brand-saffron); } 
+        .contact-btn { background-color: var(--brand-green); color: var(--text-light); text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: 700; font-size: 15px; transition: background-color 0.3s ease; white-space: nowrap; } 
+        .contact-btn:hover { background-color: #0d6b52; } 
+        .image-hero { position: relative; height: 80vh; background-image: url(about\ us.png); background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--text-light); } 
+        .image-hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(10, 84, 65, 0.6); z-index: 1; } 
+        .hero-content { position: relative; z-index: 2; opacity: 0; transform: translateY(20px); animation: fadeIn 1s forwards 0.3s; } @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+        .hero-main-text { font-family: 'Manrope', sans-serif; font-size: clamp(3rem, 10vw, 5.5rem); font-weight: 700; line-height: 1.1; text-transform: uppercase; letter-spacing: 0.08em; } 
+        .hero-tagline { font-family: 'Lora', serif; font-size: clamp(1.1rem, 2.5vw, 1.4rem); font-weight: 500; color: var(--brand-saffron); text-transform: uppercase; letter-spacing: 0.2em; } 
+        .philosophy-section { padding: 100px 40px; background-color: var(--bg-white); text-align: center; } 
+        .philosophy-content { max-width: 850px; margin: 0 auto; } 
+        .philosophy-content h2 { font-size: clamp(2rem, 5vw, 2.625rem); color: var(--brand-green); margin-bottom: 20px; font-family: 'Lora', serif; } 
+        .philosophy-content p { font-size: 19px; line-height: 1.8; color: #555; font-family: 'Lora', serif; } 
+        .values-section { padding: 100px 40px; } 
+        .section-header { text-align: center; margin-bottom: 60px; } 
+        .section-header h2 { font-size: 42px; font-family: 'Lora', serif; color: var(--brand-green); margin-bottom: 15px; } 
+        .section-header p { font-size: 18px; line-height: 1.7; color: #555; max-width: 700px; margin: 0 auto; } 
+        .values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; } 
+        .value-card { background: var(--bg-white); border: 1px solid var(--border-color); border-radius: 12px; padding: 40px 30px; text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease; } 
+        .value-card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.08); }
+        .value-icon { margin-bottom: 20px; color: var(--brand-green); } 
+        .value-icon svg { width: 45px; height: 45px; } 
+        .value-card h3 { font-family: 'Lora', serif; font-size: 24px; color: var(--brand-green); margin-bottom: 15px; } 
+        .value-card p { font-size: 15px; line-height: 1.7; color: #666; } 
+        .split-section { display: grid; grid-template-columns: 1fr 1fr; background: var(--bg-white); min-height: 70vh; } 
+        .split-image { background-size: cover; background-position: center; } 
+        .split-content { padding: 80px 60px; display: flex; flex-direction: column; justify-content: center; } 
+        .split-content h2 { font-family: 'Lora', serif; font-size: 42px; color: var(--brand-green); margin-bottom: 20px; } 
+        .split-content p { font-size: 17px; line-height: 1.8; color:#555; margin-bottom: 1.5em; } 
+        .split-content strong { color: var(--brand-green); font-weight: 700; } 
+        .cta-section { padding: 100px 40px; background-color: var(--brand-green-light); text-align: center; } 
+        .cta-section h2 { font-size: 36px; font-family: 'Lora', serif; color: var(--brand-green); margin-bottom: 25px; max-width: 800px; margin-left: auto; margin-right: auto; line-height: 1.4; } 
+        .site-footer { background-color: var(--brand-green); color: var(--text-light); padding: 80px 40px 40px; } .footer-main { display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 50px; padding-bottom: 50px; border-bottom: 1px solid rgba(255, 255, 255, 0.2); } .footer-column .footer-logo { display: flex; align-items: center; text-decoration: none; margin-bottom: 20px; } .site-footer .logo-image { height: 60px; } .site-footer .logo-text-wrapper { margin-left: 15px; } .site-footer .tagline-logo-line { color: var(--text-light); opacity: 0.8; } .footer-column p.footer-description { font-size: 15px; line-height: 1.7; opacity: 0.8; max-width: 300px; } .footer-column h4 { font-size: 18px; margin-bottom: 20px; font-weight: 700; color: var(--brand-saffron); } .footer-links { list-style: none; padding: 0; margin: 0; } .footer-links li { margin-bottom: 12px; } .footer-links a, .footer-links p { color: var(--text-light); text-decoration: none; opacity: 0.8; transition: opacity 0.3s ease; } .footer-links a:hover { opacity: 1; } .footer-socials { display: flex; gap: 10px; } .footer-socials a { display: inline-flex; justify-content: center; align-items: center; width: 40px; height: 40px; background-color: rgba(255, 255, 255, 0.1); border-radius: 5px; transition: background-color 0.3s ease; } .footer-socials a:hover { background-color: var(--brand-saffron); } .footer-socials svg { width: 20px; height: 20px; fill: var(--text-light); } .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 30px; font-size: 14px; opacity: 0.7; } .footer-bottom-links { display: flex; align-items: center; gap: 20px; } .footer-bottom-links a { color: var(--text-light); text-decoration: none; } .logo-hex-icon { background-color: var(--brand-saffron); width: 20px; height: 23px; clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); } 
+        .fade-in-section { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; } 
+        .fade-in-section.is-visible { opacity: 1; transform: translateY(0); } 
+        .nav-toggle { display: none; } 
+        .mobile-nav-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--bg-paper); z-index: 2000; display: flex; flex-direction: column; justify-content: center; align-items: center; transform: translateY(-100%); transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1); } 
+        .mobile-nav-overlay.open { transform: translateY(0); } 
+        .mobile-nav-overlay ul { list-style: none; text-align: center; padding: 0; } 
+        .mobile-nav-overlay li { margin: 20px 0; } 
+        .mobile-nav-overlay a { font-family: 'Lora', serif; font-size: 28px; color: var(--text-dark); text-decoration: none; } 
+        .cursor-dot-outline { pointer-events: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 30px; height: 30px; background-color: transparent; border: 2px solid var(--cursor-outline-color); border-radius: 50%; z-index: 9999; opacity: 0.5; transition: transform 0.2s ease-out, width 0.3s ease-out, height 0.3s ease-out; } .cursor-dot { pointer-events: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 6px; height: 6px; background-color: var(--cursor-dot-color); border-radius: 50%; z-index: 9999; } .cursor-hover { transform: translate(-50%, -50%) scale(1.5); width: 40px; height: 40px; border: 2px solid var(--brand-saffron); }
+        .cursor-dot.neon-mode { background-color: var(--neon-green); } .cursor-dot-outline.neon-mode { border-color: var(--neon-green); }
+        a, button { cursor: none; }
+
+        /* --- Interactive Eyes Section Styles --- */
+        .interactive-section { background-color: #000; padding: 100px 40px; display: flex; justify-content: center; align-items: center; min-height: 70vh; overflow: hidden; position: relative; }
+        #matrix-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+        .interactive-container { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 30px; }
+        .interactive-text { font-family: 'VT323', monospace; color: white; font-size: clamp(2.5rem, 8vw, 5rem); text-transform: uppercase; text-shadow: 0 0 5px rgba(255,255,255,0.3), 0 0 10px var(--brand-saffron); pointer-events: none; animation: text-flicker 4s linear infinite; }
+        @keyframes text-flicker { 0%, 18%, 22%, 25%, 53%, 57%, 100% { text-shadow: 0 0 4px #fff, 0 0 11px var(--brand-saffron), 0 0 19px var(--brand-saffron), 0 0 40px var(--neon-green), 0 0 80px var(--neon-green); } 20%, 24%, 55% { text-shadow: none; } }
+        .eyes-wrapper { display: flex; gap: 40px; position: relative; }
+        .eye { --eyebrow-rotation: -15deg; width: 150px; height: 150px; background: radial-gradient(circle at 60% 40%, #fff 50%, #ddd 100%); border-radius: 50%; position: relative; box-shadow: 0 5px 15px rgba(0,0,0,0.3), inset 0 0 20px rgba(0,0,0,0.2); display: flex; justify-content: center; align-items: center; transition: border-radius 0.4s ease; }
+        .eye:last-child { --eyebrow-rotation: 15deg; }
+        .eye::before { content: ''; position: absolute; top: -30px; left: 50%; width: 100%; height: 50px; background: #222; border-radius: 50% / 100%; border-bottom-left-radius: 0; border-bottom-right-radius: 0; transform: translateX(-50%) rotate(var(--eyebrow-rotation)); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .eye:last-child::before { transform: translateX(-50%) rotate(var(--eyebrow-rotation)) scaleX(-1); }
+        .pupil { width: 60px; height: 60px; background: radial-gradient(circle at 65% 35%, #fff 2%, #444 8%, #8b4513 30%, #000 70%); border-radius: 50%; position: relative; transition: transform 0.1s linear; }
+        /* States */
+        .eye.state-happy:first-child { --eyebrow-rotation: -25deg; }
+        .eye.state-happy:last-child { --eyebrow-rotation: 25deg; }
+        .eye.state-sad:first-child { --eyebrow-rotation: 10deg; }
+        .eye.state-sad:last-child { --eyebrow-rotation: -10deg; }
+        .eye.state-angry { border-radius: 50% 50% 40% 40%; }
+        .eye.state-angry:first-child { --eyebrow-rotation: 5deg; }
+        .eye.state-angry:last-child { --eyebrow-rotation: -5deg; }
+
+        @media (max-width: 1024px) { .primary-navigation, .header-right .contact-btn { display: none; } .nav-toggle { display: block; background: none; border: none; cursor: pointer; z-index: 2001; } .hamburger { display: block; position: relative; width: 30px; height: 3px; background-color: var(--text-dark); border-radius: 5px; } .hamburger::before, .hamburger::after { content: ''; position: absolute; left: 0; width: 100%; height: 3px; background-color: var(--text-dark); border-radius: 5px; transition: transform 0.3s ease; } .hamburger::before { top: -8px; } .hamburger::after { top: 8px; } .mobile-nav-open .hamburger { background-color: transparent; } .mobile-nav-open .hamburger::before { transform: translateY(8px) rotate(45deg); } .mobile-nav-open .hamburger::after { transform: translateY(-8px) rotate(-45deg); } .split-section { grid-template-columns: 1fr; } .split-image { min-height: 400px; grid-row: 1; } .split-content { grid-row: 2; } } 
+        @media (max-width: 900px) { .container { padding: 0 20px; } .header { padding: 15px 20px; } .philosophy-section, .values-section, .cta-section { padding-left: 20px; padding-right: 20px; } .split-content { padding: 60px 30px; } .footer-main { grid-template-columns: 1fr 1fr; } .footer-column:first-child { grid-column: 1 / -1; text-align: center; } .footer-column:first-child .footer-logo, .footer-column:first-child .logo-text-wrapper { justify-content: center; align-items: center; } .footer-column:first-child .footer-description { margin: 20px auto 0 auto; } } 
+        @media (max-width: 768px) { .footer-main { grid-template-columns: 1fr; text-align: center; } .footer-column { margin-bottom: 30px; } .footer-links, .footer-socials { justify-content: center; } .footer-bottom { flex-direction: column-reverse; gap: 20px; } .eye { width: 100px; height: 100px; } .pupil { width: 40px; height: 40px; } .eyes-wrapper { gap: 20px; } .eye::before { top: -20px; } }
+        @media (max-width: 600px) { .cursor-dot-outline, .cursor-dot { display: none; } html { cursor: auto; } a, button { cursor: pointer; } }
+    </style>
+</head>
+<body>
+    <div class="cursor-dot-outline"></div>
+    <div class="cursor-dot"></div>
+
+    <header class="header">
+        <a href="index.html" class="logo-container">
+            <img src="logo.png" alt="Lifewood Logo" class="logo-image">
+
+        </a>
+        <div class="header-right">
+            <nav class="primary-navigation" id="primary-navigation-desktop">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="About Us.html" class="active-link">About Us</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="project.html">Projects</a></li>
+                </ul>
+            </nav>
+            <a href="contact.html" class="contact-btn">Contact</a>
+            <button class="nav-toggle" aria-controls="mobile-nav-overlay" aria-expanded="false"><span class="hamburger"></span></button>
+        </div>
+    </header>
+    
+    <div class="mobile-nav-overlay" id="mobile-nav-overlay">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="About Us.html" class="active-link">About Us</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="project.html">Projects</a></li>
+        </ul>
+        <a href="contact.html" class="contact-btn">Contact</a>
+    </div>
+
+    <main>
+        <section class="image-hero">
+            <div class="hero-content">
+                <h1 class="hero-main-text">Our Story</h1>
+                <p class="hero-tagline">Technology with a Human Core</p>
+            </div>
+        </section>
+
+        <section class="philosophy-section fade-in-section">
+            <div class="container">
+                <div class="philosophy-content">
+                    <h2>Driven by Purpose, Guided by Principle</h2>
+                    <p>Since 2004, Lifewood has earned its reputation as a trusted leader in AI data solutions. While commercial success drives our innovation, our actions are fundamentally shaped by an unwavering commitment to the foundational principles that define our conduct across the globe.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- NEW REBUILT INTERACTIVE SECTION -->
+        <section class="interactive-section fade-in-section">
+            <canvas id="matrix-canvas"></canvas>
+            <div class="interactive-container">
+                <div class="interactive-text text-top">Always On</div>
+                <div class="eyes-wrapper">
+                    <div class="eye">
+                        <div class="pupil"></div>
+                    </div>
+                    <div class="eye">
+                        <div class="pupil"></div>
+                    </div>
+                </div>
+                <div class="interactive-text text-bottom">Never Off</div>
+            </div>
+        </section>
+
+        <section class="values-section fade-in-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Our Core Values</h2>
+                    <p>These four pillars are the bedrock of our culture, informing every decision we make and every partnership we build.</p>
+                </div>
+                <div class="values-grid">
+                    <div class="value-card"><div class="value-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm-1.999 14.413c-2.401 0-4-1.6-4-3.413 0-1.851 1.666-3.486 4-3.486s4 1.635 4 3.486c0 1.813-1.599 3.413-4 3.413zm5.413-3.413c0 2.248-1.503 4.072-3.413 4.072s-3.413-1.824-3.413-4.072c0-2.248 1.503-4.072 3.413-4.072s3.413 1.824 3.413 4.072z"/></svg></div><h3>Diversity</h3><p>We embrace a rich tapestry of cultures, backgrounds, and thoughts, knowing that unique viewpoints are the catalyst for groundbreaking ideas and collective progress.</p></div>
+                    <div class="value-card"><div class="value-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4.248c-3.148-5.402-12-3.825-12 2.942 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.942z"/></svg></div><h3>Caring</h3><p>Our work is rooted in a profound respect and empathy for every individual, fostering a supportive environment where people and purpose can thrive together.</p></div>
+                    <div class="value-card"><div class="value-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.282 15.422A.5.5 0 0 1 3.5 17V15a8 8 0 1 1 14.53 4H15.5a.5.5 0 0 1-.278-.922A10.005 10.005 0 0 0 12 2zm1 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-3-4a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-1 6v-2h2v2h-2zm6-4a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></div><h3>Innovation</h3><p>Innovation is the engine that drives us. It compels us to push the boundaries of technology, continually refining our processes and enhancing our services.</p></div>
+                    <div class="value-card"><div class="value-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></div><h3>Integrity</h3><p>We operate with unwavering ethical and sustainable standards. For us, integrity is a non-negotiable principle that forms the bedrock of our reputation and relationships.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="split-section fade-in-section">
+            <div class="split-image" style="background-image: url(empowering.png);"></div>
+            <div class="split-content">
+                <h2>Creating Opportunity, Empowering Communities</h2>
+                <p>Our global presence is more than a business footprint; it is a commitment to creating pathways for economic empowerment. In global communities, we provide sustainable careers with competitive wages and world-class technical training.</p>
+                <p>Our dedication to inclusive hiring is exemplified in our Bangladesh operations. Here, we've had the privilege of working with inspiring individuals like <strong>Tilotom</strong>. Born with a physical disability and facing significant barriers, he has, through his own perseverance and our training, mastered his role. Today, he is not only his family's primary provider but also one of our top performers, managing significant responsibilities. </p>
+            </div>
+        </section>
+
+        <section class="cta-section fade-in-section">
+            <div class="container">
+                <h2>We believe technology must serve humanity. That is the Lifewood difference.</h2>
+                <a href="contact.html" class="contact-btn">Partner With Us</a>
+            </div>
+        </section>
+    </main>
+    
+    <footer id="contact" class="site-footer">
+        <div class="container">
+            <div class="footer-main">
+                <div class="footer-column">
+                    <a href="index.html" class="footer-logo">
+                        <img src="icon.png" alt="Lifewood Logo" class="logo-image">
+                        <div class="logo-text-wrapper">
+                            <div class="tagline-logo-line">Lifewood Data Technology Limited</div>
+                        </div>
+                    </a>
+                    <p class="footer-description">Lifewood is a global leader in data services, delivering high-quality, scalable support to power cutting-edge artificial intelligence technologies worldwide.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Explore</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="About Us.html">About Us</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="project.html">Projects</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-links">
+                        <li><a href="mailto:hr.lifewood@gmail.com">hr.lifewood@gmail.com</a></li>
+                        <li><a href="tel:09327052554">0932 705 2554</a></li>
+                        <li><p>Ground Floor i2 Building, Jose Del Mar St., Cebu IT Park, Apas Lahug, Cebu City, 6000</p></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Follow Us</h4>
+                    <div class="footer-socials"><a href="https://www.facebook.com/LifewoodPH" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v7.028C18.343 21.128 22 16.991 22 12z"/></svg></a><a href="https://www.youtube.com/@LifewoodDataTechnology" aria-label="YouTube"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a></div>
+                </div>
+            </div>
+            <div class="footer-bottom"><span>© 2025 Lifewood AI Global Data</span><div class="footer-bottom-links"><a href="privacy policies.html">Privacy Policy</a><a href="terms of services.html">Terms of Service</a><div class="logo-hex-icon"></div></div></div>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Mobile Navigation ---
+            const navToggle = document.querySelector('.nav-toggle');
+            const mobileNav = document.getElementById('mobile-nav-overlay');
+            if (navToggle && mobileNav) {
+                navToggle.addEventListener('click', () => {
+                    document.body.classList.toggle('mobile-nav-open');
+                    mobileNav.classList.toggle('open');
+                });
+            }
+
+            // --- Scroll Animations ---
+            const fadeInObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add("is-visible"); } });
+            }, { threshold: 0.1 });
+            document.querySelectorAll(".fade-in-section").forEach(section => fadeInObserver.observe(section));
+
+            // --- Interactive Eyes Logic ---
+            const pupils = document.querySelectorAll('.pupil');
+            const eyes = document.querySelectorAll('.eye');
+            const interactiveSection = document.querySelector('.interactive-section');
+            let idleTimer;
+            let currentEyeState = 'happy';
+
+            const setEyeState = (state) => {
+                if (currentEyeState === state) return;
+                currentEyeState = state;
+                eyes.forEach(eye => {
+                    eye.classList.remove('state-happy', 'state-sad', 'state-angry');
+                    eye.classList.add(`state-${state}`);
+                });
+            };
+
+            if (interactiveSection) {
+                interactiveSection.addEventListener('mousemove', (e) => {
+                    setEyeState('happy');
+                    clearTimeout(idleTimer);
+                    idleTimer = setTimeout(() => setEyeState('angry'), 3000);
+
+                    pupils.forEach((pupil, index) => {
+                        const eye = eyes[index];
+                        const rect = eye.getBoundingClientRect();
+                        const eyeX = rect.left + rect.width / 2;
+                        const eyeY = rect.top + rect.height / 2;
+                        
+                        const pupilMaxOffset = (eye.clientWidth - pupil.clientWidth) / 3;
+                        const angle = Math.atan2(e.clientY - eyeY, e.clientX - eyeX);
+                        
+                        const pupilX = Math.cos(angle) * pupilMaxOffset;
+                        const pupilY = Math.sin(angle) * pupilMaxOffset;
+                        pupil.style.transform = `translate(${pupilX}px, ${pupilY}px)`;
+                    });
+                });
+
+                // Sad on Scroll Away Logic
+                const eyeObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            setEyeState('happy'); // Be happy when visible
+                        } else {
+                            setEyeState('sad'); // Be sad when not visible
+                        }
+                    });
+                }, { threshold: 0.1 }); // Trigger when 10% is visible/hidden
+                
+                eyeObserver.observe(interactiveSection);
+                
+                // Set initial state
+                setEyeState('happy');
+            }
+
+            // --- Floating Code Canvas Logic ---
+            const canvas = document.getElementById('matrix-canvas');
+            if(canvas) {
+                const ctx = canvas.getContext('2d');
+                const resizeCanvas = () => {
+                    canvas.width = canvas.offsetWidth;
+                    canvas.height = canvas.offsetHeight;
+                };
+                window.addEventListener('resize', resizeCanvas);
+                resizeCanvas();
+
+                const characters = 'いつもお届けします01'; // "We always deliver" in Japanese + 01
+                const fontSize = 16;
+                const columns = Math.floor(canvas.width / fontSize);
+                const drops = Array(columns).fill(1).map(() => Math.random() * canvas.height);
+                const colors = ['#FFB347', '#0a5441', '#39ff14'];
+
+                function draw() {
+                    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    ctx.font = `${fontSize}px monospace`;
+                    for (let i = 0; i < drops.length; i++) {
+                        const text = characters.charAt(Math.floor(Math.random() * characters.length));
+                        ctx.fillStyle = colors[Math.floor(Math.random() * colors.length)];
+                        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                            drops[i] = 0;
+                        }
+                        drops[i]++;
+                    }
+                }
+                setInterval(draw, 40);
+            }
+
+            // --- Custom Cursor Logic ---
+            const cursorDot = document.querySelector(".cursor-dot");
+            const cursorOutline = document.querySelector(".cursor-dot-outline");
+            
+            window.addEventListener("mousemove", function (e) {
+                const posX = e.clientX;
+                const posY = e.clientY;
+                if(cursorDot) { cursorDot.style.left = `${posX}px`; cursorDot.style.top = `${posY}px`; }
+                if(cursorOutline) {
+                    cursorOutline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 500, fill: "forwards" });
+                }
+            });
+
+            const handleLinkHover = (e) => {
+                if(cursorOutline) cursorOutline.classList.toggle('cursor-hover', e.type === 'mouseover');
+            };
+            document.querySelectorAll("a, button").forEach((el) => {
+                el.addEventListener("mouseover", handleLinkHover);
+                el.addEventListener("mouseout", handleLinkHover);
+            });
+
+            if(interactiveSection && cursorDot && cursorOutline) {
+                interactiveSection.addEventListener('mouseenter', () => {
+                    cursorDot.classList.add('neon-mode');
+                    cursorOutline.classList.add('neon-mode');
+                });
+                interactiveSection.addEventListener('mouseleave', () => {
+                    cursorDot.classList.remove('neon-mode');
+                    cursorOutline.classList.remove('neon-mode');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
