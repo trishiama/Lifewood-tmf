@@ -138,6 +138,21 @@
     .employee-card p { color: var(--text-light); font-size: 14px; margin-bottom: 12px; }
     .employee-card .status { background-color: var(--green); color: white; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 12px; display: inline-block; }
     
+    /* NEW STYLE FOR ROLE TITLES */
+    .role-title {
+        font-family: 'Lora', serif;
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--brand-green);
+        margin-top: 32px;
+        margin-bottom: 16px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid var(--border-color);
+    }
+    #employeeGrid .role-title:first-of-type {
+        margin-top: 0;
+    }
+
     .setting-item { display: flex; align-items: center; justify-content: space-between; padding: 20px 0; border-bottom: 1px solid var(--border-color); }
     .setting-item:last-child { border-bottom: none; }
     .setting-item .label h4 { font-size: 16px; font-weight: 600; }
@@ -184,8 +199,12 @@
             </section>
         </div>
         <div id="employees-page" class="main-page">
-            <header class="page-header"><div class="greeting"><h1>Employee Directory</h1><p>All active employees and interns</p></div></header>
-            <div class="widget-card"><h2 class="section-title">Team Members</h2><div id="employeeGrid" class="employee-grid"></div><div class="no-apps-message" id="noEmployeesMessage"></div></div>
+            <header class="page-header"><div class="greeting"><h1>Employee Directory</h1><p>All active employees and interns, grouped by role.</p></div></header>
+            <div class="widget-card">
+                 <!-- The container where role sections will be injected -->
+                <div id="employeeGrid"></div>
+                <div class="no-apps-message" id="noEmployeesMessage"></div>
+            </div>
         </div>
        
         <div id="settings-page" class="main-page">
@@ -296,7 +315,7 @@
 
                   if (status === 'accepted') {
                       populateTable(snapshot, 'acceptedTable', 'noAcceptedMessage');
-                      populateEmployeeGrid(snapshot);
+                      populateEmployeeGrid(snapshot); // MODIFIED: This function now handles the grouping
                   } else if (status === 'pending') {
                       populateTable(snapshot, 'pendingTable', 'noPendingMessage');
                       populateRecentPendingTable(snapshot);
@@ -364,28 +383,64 @@
                 `;
             });
         }
+        
+        // --- MODIFIED FUNCTION TO GROUP EMPLOYEES BY ROLE ---
         function populateEmployeeGrid(snapshot) {
-            const grid = document.getElementById('employeeGrid');
+            const mainContainer = document.getElementById('employeeGrid');
             const message = document.getElementById('noEmployeesMessage');
-            grid.innerHTML = '';
+            mainContainer.innerHTML = ''; // Clear previous content
+
             if (snapshot.empty) {
                 message.textContent = 'No employees found. Accept applications to add them here.';
                 message.style.display = 'block';
+                mainContainer.style.display = 'none';
                 return;
             }
+
             message.style.display = 'none';
+            mainContainer.style.display = 'block';
+
+            // 1. Group employees by their role (project)
+            const employeesByRole = {};
             snapshot.forEach(doc => {
                 const employee = doc.data();
-                const card = document.createElement('div');
-                card.className = 'widget-card employee-card';
-                const placeholderImg = `https://i.pravatar.cc/100?u=${employee.email}`;
-                card.innerHTML = `
-                    <img src="${placeholderImg}" alt="Profile Picture">
-                    <h4>${employee.firstName || ''} ${employee.lastName || ''}</h4>
-                    <p>${employee.project || 'N/A'}</p>
-                    <span class="status">Active</span>
-                `;
-                grid.appendChild(card);
+                const role = employee.project || 'Uncategorized';
+                if (!employeesByRole[role]) {
+                    employeesByRole[role] = [];
+                }
+                employeesByRole[role].push(employee);
+            });
+
+            // 2. Create HTML for each role group
+            const sortedRoles = Object.keys(employeesByRole).sort();
+
+            sortedRoles.forEach(role => {
+                // Create a title for the role section
+                const roleHeader = document.createElement('h3');
+                roleHeader.className = 'role-title';
+                roleHeader.textContent = role;
+                mainContainer.appendChild(roleHeader);
+
+                // Create a grid container for this specific role
+                const roleGrid = document.createElement('div');
+                roleGrid.className = 'employee-grid';
+
+                // Create and append employee cards for this role
+                employeesByRole[role].forEach(employee => {
+                    const card = document.createElement('div');
+                    card.className = 'widget-card employee-card';
+                    const placeholderImg = `https://i.pravatar.cc/100?u=${employee.email}`;
+                    card.innerHTML = `
+                        <img src="${placeholderImg}" alt="Profile Picture">
+                        <h4>${employee.firstName || ''} ${employee.lastName || ''}</h4>
+                        <p>${employee.email || 'N/A'}</p>
+                        <span class="status">Active</span>
+                    `;
+                    roleGrid.appendChild(card);
+                });
+                
+                // Append the role's grid to the main container
+                mainContainer.appendChild(roleGrid);
             });
         }
         
